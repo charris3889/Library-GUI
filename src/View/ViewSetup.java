@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ViewSetup implements ActionListener{
+public class ViewSetup{
     private JFrame frame; 
     private JLabel idLabel;
     private JLabel pwLabel; 
@@ -26,29 +26,22 @@ public class ViewSetup implements ActionListener{
         JTextField pwEntryField = new JTextField(PW_LENGTH);
 
         JButton enterButton = new JButton("Enter");
-        enterButton.addActionListener(this);
-
+        enterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String id = idEntryField.getText();
+                String pw = pwEntryField.getText();
+                //Check string cannot be used for sql injection or anything
+                //Check against database
+            }
+        });
         frame.add(idLabel);
         frame.add(pwLabel);
         frame.add(idEntryField);
         frame.add(pwEntryField);
         frame.add(enterButton);
         frame.setVisible(true); 
-    }
 
-    public void actionPerformed(ActionEvent e) {
-        //Save text fields and check if a valid user
-        String id = idLabel.getText();
-        String pw = pwLabel.getText();
 
-        /*if(UserController.isValidUser()) {
-            //Check if valid user, if valid move onto menu
-        }
-        else {
-            //Notify that this is not a valid user password combination
-            //Use a joptionpane for this
-        }        
-        */
     }
 
 }
